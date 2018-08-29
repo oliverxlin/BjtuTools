@@ -278,7 +278,7 @@ class tools(object):
 
 
 if __name__ == '__main__':
-    qk = tools("16231324","183812")
+    qk = tools("16231324","pwd")
     #qk.jwc_get_score()
    # qk.course_login()
     # qk.get_folder_urls()

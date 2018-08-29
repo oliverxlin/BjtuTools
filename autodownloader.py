@@ -16,7 +16,7 @@ def create_folder(course_list):
 
 
 #init tools,返回了课程名
-tools = bjtutools.tools('16231324','183812')
+tools = bjtutools.tools('id','pwd')
 
 course_list = tools.course_login()
 
