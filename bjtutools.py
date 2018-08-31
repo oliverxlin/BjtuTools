@@ -5,7 +5,6 @@
 # Copyright (C) 2018 Richado
 # Mail: 16231324@bjtu.edu.cn
 #=============================================================
-# coding:utf-8
 import requests
 import re
 import sys
@@ -46,7 +45,9 @@ class tools(object):
         }      
         self.session = requests.session()
     
-
+    """
+    登录mis平台
+    """
     def mis_auto_login(self):
         req = self.session.get(self.mislogin_url)
 
@@ -69,6 +70,9 @@ class tools(object):
             login_url, data=self.login_data, headers=self.header)
         
 
+    """
+    登录教务处平台
+    """
     def jwc_login(self):
         #先登陆mis
         self.mis_auto_login()
@@ -88,6 +92,10 @@ class tools(object):
             return True
         return False
 
+
+    """
+    检查教务处是否登录成功
+    """
     def check_login_dean(self, html_content):
         soup = BeautifulSoup(html_content, 'lxml')
 
@@ -97,7 +105,11 @@ class tools(object):
         else:
             print("登陆教务系统失败")
             return False
+    
 
+    """
+    获取成绩，需登录教务处系统
+    """
     def jwc_get_score(self):
     
 
@@ -237,6 +249,9 @@ class tools(object):
         dic = json.loads(js)
         f.close()
         return dic
+    """
+    获取课程表
+    """
 
     def get_schedule(self):
         if(self.jwc_login()):
@@ -278,13 +293,5 @@ class tools(object):
 
 
 if __name__ == '__main__':
-    qk = tools("16231324","pwd")
-    #qk.jwc_get_score()
-   # qk.course_login()
-    # qk.get_folder_urls()
-    # qk.get_file_list()
-# qk.download_file(qk.load('files_list')[3])
-    qk.get_schedule()
-    s = qk.load('16231324_schedule')
-    for each in s.keys():
-        print("节次:{}:{}".format(each,s[each]))
+    tool = tools("16231324","pwd")
+    tool.get_schedule()
