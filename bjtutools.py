@@ -5,6 +5,7 @@
 # Copyright (C) 2018 Richado
 # Mail: 16231324@bjtu.edu.cn
 #=============================================================
+# coding:utf-8
 import requests
 import re
 import sys
@@ -97,8 +98,8 @@ class tools(object):
     检查教务处是否登录成功
     """
     def check_login_dean(self, html_content):
-        soup = BeautifulSoup(html_content, 'lxml')
-
+        
+        soup = BeautifulSoup(html_content,'lxml')
         if soup.find('span').attrs['class'][0] == 'user-info':
             print("成功登陆教务系统")
             return True
@@ -121,6 +122,7 @@ class tools(object):
         count1 = 0
         count2 = 0
         ans = ""
+    
         for index in range(len(p)):
             if index == 0:
                 continue
@@ -203,6 +205,7 @@ class tools(object):
         return folder_urls
 
     """
+    获取文件列表,用于更新文件
     获取文件列表,用于更新文件
     """
     def get_file_list(self):
@@ -289,9 +292,11 @@ class tools(object):
             schedule_dic[section] = section_list
         
         self.save(schedule_dic,'16231324_schedule')
-
+        return schedule_dic
 
 
 if __name__ == '__main__':
-    tool = tools("16231324","pwd")
-    tool.get_schedule()
+    tool = tools("id","pwd")
+    print(tool.course_login())
+    print(tool.get_folder_urls())
+    print(tool.get_file_list())
